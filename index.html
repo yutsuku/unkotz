@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <title>UNKOTZ - Date and time converter focused on Japanese time zone and Discord App</title>
+</head>
+
+<body>
+  <main>
+    <div class="container py-4">
+      <header class="pb-3 mb-4 border-bottom">
+        <span class="d-flex align-items-center text-dark text-decoration-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="me-2" role="img"
+            viewBox="0 0 16 16">
+            <path
+              d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11.666 1.89c.682 0 1.139.47 1.187 1.107H14v-.11c-.053-1.187-1.024-2-2.342-2-1.604 0-2.518 1.05-2.518 2.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114h-1.147c-.048.615-.497 1.05-1.187 1.05-.839 0-1.318-.62-1.318-1.727v-.742c0-1.112.488-1.754 1.318-1.754zm-6.188.926h.044L6.542 11h1.006L9 5.001H7.818l-.82 4.355h-.056L5.97 5.001h-.94l-.972 4.355h-.053l-.827-4.355H2L3.452 11h1.005l1.02-4.184z" />
+          </svg>
+          <span class="fs-4">UNKOTZ</span>
+        </span>
+      </header>
+
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+          <form class="needs-validation" novalidate="">
+            <div class="row g-3">
+
+              <div class="col-md-12">
+                <label for="timezone" class="form-label">Time zone</label>
+                <select class="form-select" id="timezone" required="">
+                  <option disabled selected>Choose...</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid timezone.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" class="form-control" id="date" required="" pattern="\d{4}-\d{2}-\d{2}">
+                <div class="invalid-feedback">
+                  Date required.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="time" class="form-label">Time</label>
+                <input type="time" class="form-control" id="time" required="">
+                <div class="invalid-feedback">
+                  Time required.
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="unix" class="form-label">Unix timestamp</label>
+                <div class="input-group mb-3">
+                  <button type="button" class="input-group-text btn-primary" id="copy-unix" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Copied to clipboard!" data-trigger="manual">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path
+                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                      <path
+                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </svg>
+                  </button>
+                  <input type="text" class="form-control" id="unix" readonly>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="long" class="form-label">Long format time</label>
+                <div class="input-group mb-3">
+                  <button type="button" class="input-group-text btn-primary" id="copy-long" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Copied to clipboard!" data-trigger="manual">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path
+                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                      <path
+                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </svg>
+                  </button>
+                  <input type="text" class="form-control" id="long" readonly>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="relative" class="form-label">Relative time</label>
+                <div class="input-group mb-3">
+                  <button type="button" class="input-group-text btn-primary" id="copy-relative" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Copied to clipboard!" data-trigger="manual">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path
+                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                      <path
+                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </svg>
+                  </button>
+                  <input type="text" class="form-control" id="relative" readonly>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <footer class="pt-3 mt-4 text-muted border-top">
+        <a href="https://yutsuku.net/">moh</a> was here
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- momentjs -->
+  <script src="https://momentjs.com/downloads/moment.min.js" crossorigin="anonymous"></script>
+  <script src="https://momentjs.com/downloads/moment-timezone-with-data-10-year-range.min.js" crossorigin="anonymous"></script>
+
+  <script src="main.js"></script>
+</body>
+</html>
